@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohit Pawar | Full Stack & AI Developer</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GSAP & Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
+</head>
+<body>
+    <!-- Custom Cursor Glow -->
+    <div id="cursor-glow"></div>
+
+    <!-- Three.js Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="loader-circle"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Sticky Navbar -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">RP<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h4 class="reveal-gsap">Hello, I'm</h4>
+                <h1 class="reveal-gsap">Rohit Pawar</h1>
+                <h2 class="reveal-gsap">Full Stack & AI Developer</h2>
+                <p class="reveal-gsap tagline-container">
+                    <span id="typing-text"></span><span class="cursor">|</span>
+                </p>
+                <div class="hero-btns reveal-gsap">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-image reveal-gsap">
+                <div class="image-wrapper">
+                    <!-- Using a placeholder for now, user can replace with assets/profile.jpg -->
+                    <img src="assets/profile.png" alt="Rohit Pawar" id="profile-img">
+                    <div class="glow-border"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title reveal-gsap">About Me</h2>
+            <div class="about-grid">
+                <div class="about-text reveal-gsap">
+                    <p>
+                        I'm a passionate <strong>Full Stack & AI Developer</strong> with a focus on building scalable web applications and intelligent AI systems. With a strong foundation in Computer Engineering (B.E. 2026), I bridge the gap between robust backend architectures and intuitive, modern frontends.
+                    </p>
+                    <p>
+                        My expertise lies in developing end-to-end solutions, from complex ML models to high-performance web platforms. I thrive on solving real-world problems with a scalable systems mindset, ensuring that every project I touch is built for performance and growth.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title reveal-gsap">My Skills</h2>
+            <div class="skills-grid">
+                <!-- Frontend -->
+                <div class="skill-card reveal-gsap">
+                    <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
+                    <h3>Frontend</h3>
+                    <ul class="skill-list">
+                        <li><i class="fa-brands fa-html5"></i> HTML5</li>
+                        <li><i class="fa-brands fa-css3-alt"></i> CSS3</li>
+                        <li><i class="fa-brands fa-js"></i> JavaScript</li>
+                        <li><i class="fa-brands fa-react"></i> React</li>
+                    </ul>
+                </div>
+                <!-- Backend -->
+                <div class="skill-card reveal-gsap">
+                    <div class="skill-icon"><i class="fa-solid fa-server"></i></div>
+                    <h3>Backend</h3>
+                    <ul class="skill-list">
+                        <li><i class="fa-brands fa-node-js"></i> Node.js</li>
+                        <li><i class="fa-solid fa-bolt"></i> Express.js</li>
+                        <li><i class="fa-brands fa-java"></i> Java</li>
+                    </ul>
+                </div>
+                <!-- Database -->
+                <div class="skill-card reveal-gsap">
+                    <div class="skill-icon"><i class="fa-solid fa-database"></i></div>
+                    <h3>Database</h3>
+                    <ul class="skill-list">
+                        <li><i class="fa-solid fa-database"></i> MySQL</li>
+                        <li><i class="fa-solid fa-table"></i> SQL</li>
+                    </ul>
+                </div>
+                <!-- AI/ML -->
+                <div class="skill-card reveal-gsap">
+                    <div class="skill-icon"><i class="fa-solid fa-brain"></i></div>
+                    <h3>AI / ML</h3>
+                    <ul class="skill-list">
+                        <li><i class="fa-brands fa-python"></i> Python</li>
+                        <li><i class="fa-solid fa-robot"></i> NLP</li>
+                        <li><i class="fa-solid fa-microchip"></i> Machine Learning</li>
+                        <li><i class="fa-solid fa-network-wired"></i> RAG Systems</li>
+                    </ul>
+                </div>
+                <!-- Tools -->
+                <div class="skill-card reveal-gsap">
+                    <div class="skill-icon"><i class="fa-solid fa-wrench"></i></div>
+                    <h3>Tools</h3>
+                    <ul class="skill-list">
+                        <li><i class="fa-brands fa-git-alt"></i> Git</li>
+                        <li><i class="fa-brands fa-github"></i> GitHub</li>
+                        <li><i class="fa-solid fa-chart-line"></i> Streamlit</li>
+                        <li><i class="fa-solid fa-calculator"></i> Pandas / NumPy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title reveal-gsap">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card reveal-gsap">
+                    <div class="project-img">
+                        <img src="https://via.placeholder.com/600x400" alt="AI Mental Health">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" target="_blank"><i class="fa-solid fa-link"></i></a>
+                                <a href="#" target="_blank"><i class="fa-brands fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>AI Mental Health Sentiment & Stress Analyzer</h3>
+                        <p>NLP-based system for sentiment & stress detection with real-time predictions.</p>
+                        <div class="tags">
+                            <span>Python</span>
+                            <span>NLP</span>
+                            <span>ML</span>
+                            <span>React</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card reveal-gsap">
+                    <div class="project-img">
+                        <img src="https://via.placeholder.com/600x400" alt="Breast Cancer Prediction">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" target="_blank"><i class="fa-solid fa-link"></i></a>
+                                <a href="#" target="_blank"><i class="fa-brands fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Breast Cancer Prediction System</h3>
+                        <p>ML classifier for benign vs malignant tumors, deployed using Streamlit.</p>
+                        <div class="tags">
+                            <span>Python</span>
+                            <span>Scikit-learn</span>
+                            <span>Streamlit</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="project-card reveal-gsap">
+                    <div class="project-img">
+                        <img src="https://via.placeholder.com/600x400" alt="VoiceBrief-AI">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" target="_blank"><i class="fa-solid fa-link"></i></a>
+                                <a href="#" target="_blank"><i class="fa-brands fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>VoiceBrief-AI</h3>
+                        <p>Voice input to AI-generated summaries using speech processing and NLP.</p>
+                        <div class="tags">
+                            <span>Python</span>
+                            <span>Speech-to-Text</span>
+                            <span>NLP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Education Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <div class="dual-grid">
+                <!-- Experience -->
+                <div class="experience-col">
+                    <h2 class="section-title reveal-gsap">Experience</h2>
+                    <div class="timeline">
+                        <div class="timeline-item reveal-gsap">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Freelance Full Stack & AI Developer</h3>
+                                <span class="timeline-date">2024 – Present</span>
+                                <p>Building end-to-end applications and AI integrations for various clients.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item reveal-gsap">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Full Stack Intern</h3>
+                                <span class="timeline-company">Yuvas Film Production</span>
+                                <span class="timeline-date">Jan 2025 – Jun 2025</span>
+                                <p>Assisted in developing and maintaining web applications using modern stacks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Education & Achievements -->
+                <div class="education-col">
+                    <h2 class="section-title reveal-gsap">Education</h2>
+                    <div class="timeline">
+                        <div class="timeline-item reveal-gsap">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>B.E Computer Engineering</h3>
+                                <span class="timeline-date">2026 (Expected)</span>
+                                <p>Vidyavardhini's College of Engineering and Technology</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="section-title reveal-gsap" style="margin-top: 2rem;">Achievements</h2>
+                    <div class="achievement-card reveal-gsap">
+                        <div class="achievement-icon"><i class="fa-solid fa-trophy"></i></div>
+                        <div class="achievement-text">
+                            <h3>1st Place — VNPS Project Showcase</h3>
+                            <p>Awarded for excellence in project implementation and presentation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title reveal-gsap">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info reveal-gsap">
+                    <div class="contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>rohit03576@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+91 73979 73352</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Maharashtra, India</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://linkedin.com" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://github.com" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+                <form id="contact-form" class="contact-form reveal-gsap">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Rohit Pawar. Built with ❤️ and Code.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
