@@ -63,6 +63,7 @@ function initBarba() {
                         if (window.initAnimations) window.initAnimations();
                         if (window.initHero3D) window.initHero3D();
                         if (window.initBackground3D) window.initBackground3D();
+                        if (window.initProjects) window.initProjects();
                     }
                 });
                 

@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initContactForm();
     
+    if (window.initProjects) {
+        window.initProjects();
+    }
+    
     if (window.initBarba) {
         window.initBarba();
     }
@@ -187,38 +191,61 @@ function initProfileTilt() {
 
 // Project Card 3D Tilt Effect
 function initCardTilt() {
+    if (window.innerWidth < 1024) return; // Disable on mobile/tablet for performance
+    
     const cards = document.querySelectorAll('.project-card');
     
     cards.forEach(card => {
-        if (window.innerWidth < 768) return;
-        
         let targetX = 0, targetY = 0;
         let currentX = 0, currentY = 0;
+        let isHovered = false;
+        let rect = null;
+        
+        card.addEventListener('mouseenter', () => {
+            isHovered = true;
+            rect = card.getBoundingClientRect(); // Cache rect on enter
+            gsap.to(card, { scale: 1.03, duration: 0.3, ease: "power2.out" });
+        });
         
         card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
+            if (!rect) return;
+            
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             
-            targetX = (y - centerY) / 12;
-            targetY = (centerX - x) / 12;
+            // Calculate tilt based on cursor position
+            targetX = (y - centerY) / 10;
+            targetY = (centerX - x) / 10;
         });
         
         card.addEventListener('mouseleave', () => {
+            isHovered = false;
             targetX = 0;
             targetY = 0;
+            gsap.to(card, { 
+                scale: 1, 
+                rotateX: 0, 
+                rotateY: 0, 
+                duration: 0.5, 
+                ease: "power2.out" 
+            });
         });
         
         function animateCard() {
+            if (!isHovered && Math.abs(currentX) < 0.01 && Math.abs(currentY) < 0.01) {
+                requestAnimationFrame(animateCard);
+                return;
+            }
+
             currentX += (targetX - currentX) * 0.1;
             currentY += (targetY - currentY) * 0.1;
             
             gsap.set(card, {
                 rotateX: currentX,
                 rotateY: currentY,
-                duration: 0
+                transformPerspective: 1000
             });
             
             requestAnimationFrame(animateCard);
