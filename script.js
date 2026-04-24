@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Loading Screen
     const loader = document.getElementById('loader');
+    const pageContent = document.getElementById('page-content');
+
     window.addEventListener('load', () => {
         gsap.to(loader, {
             opacity: 0,
@@ -15,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 2. Three.js Background
-    let scene, camera, renderer, particles;
+    // 2. Three.js Background (Floating Sphere)
+    let scene, camera, renderer, sphere;
 
     function initThree() {
         const canvas = document.getElementById('bg-canvas');
@@ -28,32 +30,32 @@ document.addEventListener('DOMContentLoaded', () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
 
-        // Create Particles
-        const particlesGeometry = new THREE.BufferGeometry();
-        const count = window.innerWidth < 768 ? 500 : 1500; // Performance optimization
-        const positions = new Float32Array(count * 3);
-
-        for (let i = 0; i < count * 3; i++) {
-            positions[i] = (Math.random() - 0.5) * 10;
-        }
-
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.015,
-            color: 0x7c4dff,
+        // Sphere
+        const geometry = new THREE.SphereGeometry(1, 32, 32);
+        const material = new THREE.MeshPhysicalMaterial({
+            color: 0x4a90e2, // Soft blue
+            metalness: 0.5,
+            roughness: 0.1,
+            transmission: 0.9,
             transparent: true,
-            opacity: 0.5
+            thickness: 0.5
         });
-
-        particles = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particles);
+        sphere = new THREE.Mesh(geometry, material);
+        scene.add(sphere);
 
         camera.position.z = 3;
 
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+
         function animate() {
             requestAnimationFrame(animate);
-            particles.rotation.y += 0.001;
-            particles.rotation.x += 0.0005;
+            sphere.rotation.y += 0.002;
+            sphere.rotation.x += 0.001;
             renderer.render(scene, camera);
         }
         animate();
@@ -96,15 +98,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Timeline Growth Animation
-        gsap.from(".timeline::before", {
-            scaleY: 0,
-            transformOrigin: "top",
-            scrollTrigger: {
-                trigger: ".timeline",
-                start: "top center",
-                end: "bottom center",
-                scrub: true
-            }
+        gsap.utils.toArray(".timeline").forEach(timeline => {
+            gsap.from(timeline.querySelector("::before"), {
+                scaleY: 0,
+                transformOrigin: "top",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: timeline,
+                    start: "top center",
+                    end: "bottom center",
+                    scrub: true
+                }
+            });
         });
     }
 
@@ -138,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         setTimeout(type, typeSpeed);
     }
-    type();
+    if (typingText) type(); // Only run if element exists
 
     // 5. Interactivity: Cursor Glow & Card Tilt
     const cursorGlow = document.getElementById('cursor-glow');
@@ -152,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Card Tilt Effect
         if (window.innerWidth > 992) {
-            const cards = document.querySelectorAll('.skill-card, .project-card');
+            const cards = document.querySelectorAll('.skill-card, .project-card, .featured-card');
             cards.forEach(card => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
@@ -180,7 +185,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 6. Scroll Progress
+    // 6. Smooth Page Transitions
+    function goToPage(url) {
+        pageContent.classList.add('fade-out');
+        gsap.to(pageContent, {
+            opacity: 0,
+            duration: 0.5,
+            onComplete: () => {
+                window.location.href = url;
+            }
+        });
+    }
+
+    document.querySelectorAll('a[href^="index.html"], a[href^="about.html"], a[href^="projects.html"], a[href^="contact.html"], a[href^="project-detail.html"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href.startsWith('#')) { // Handle internal anchor links
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            } else { // Handle external page links
+                e.preventDefault();
+                goToPage(href);
+            }
+        });
+    });
+
+    // 7. Scroll Progress
     const scrollProgress = document.getElementById('scroll-progress');
     window.addEventListener('scroll', () => {
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -191,12 +231,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const navbar = document.getElementById('navbar');
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
-        } else {
+        }
+        else {
             navbar.classList.remove('scrolled');
         }
+
+        // Active link highlighting
+        const navLinks = document.querySelectorAll('.nav-links a');
+        let current = "";
+        document.querySelectorAll('section').forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
     });
 
-    // 7. Mobile Menu
+    // 8. Mobile Menu
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     hamburger.addEventListener('click', () => {
@@ -204,7 +263,17 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.classList.toggle('toggle');
     });
 
-    // Handle Window Resize
+    // Close mobile menu when a link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('toggle');
+            }
+        });
+    });
+
+    // 9. Handle Window Resize
     window.addEventListener('resize', () => {
         if (camera && renderer) {
             camera.aspect = window.innerWidth / window.innerHeight;
@@ -212,4 +281,14 @@ document.addEventListener('DOMContentLoaded', () => {
             renderer.setSize(window.innerWidth, window.innerHeight);
         }
     });
+
+    // 10. Form Submission (Prevent Default)
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! This is a demo form.');
+            contactForm.reset();
+        });
+    }
 });
