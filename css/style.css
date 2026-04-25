@@ -26,7 +26,7 @@ html {
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: var(--bg-color);
+    background: linear-gradient(180deg, #ffffff, #f5f7fa);
     color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
@@ -53,10 +53,10 @@ body.nav-open {
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 999;
     transform: translate(-50%, -50%);
     will-change: transform;
-    transition: transform 0.1s ease, background 0.2s ease;
+    transition: transform 0.1s ease, background 0.2s ease, opacity 0.3s ease;
     mix-blend-mode: difference;
 }
 
@@ -67,10 +67,10 @@ body.nav-open {
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
-    z-index: 9998;
+    z-index: 998;
     transform: translate(-50%, -50%);
     will-change: transform;
-    transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease;
+    transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease, opacity 0.3s ease;
     mix-blend-mode: difference;
 }
 
@@ -254,6 +254,8 @@ body.nav-open {
     position: relative;
     z-index: 2;
     width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -304,7 +306,8 @@ body.nav-open {
 }
 
 .hero-image {
-    flex: 0 0 45%;
+    width: 45%;
+    min-height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -314,14 +317,24 @@ body.nav-open {
 
 #hero-3d {
     width: 100%;
-    height: 600px;
+    height: 500px;
     position: relative;
-    z-index: 2;
+    z-index: 1;
     cursor: grab;
     overflow: visible;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+}
+
+canvas {
+    display: block;
 }
 
 @media (max-width: 1024px) {
@@ -440,6 +453,34 @@ body.nav-open {
     font-size: clamp(1.4rem, 3.5vw, 2.2rem);
     font-weight: 700;
     margin-bottom: 2.5rem;
+}
+
+/* About Home Section */
+.about-home {
+    background: transparent;
+}
+
+.about-home .about-content {
+    max-width: 750px;
+}
+
+.about-home .section-description {
+    max-width: 100%;
+    margin-bottom: 2rem;
+}
+
+.about-home .section-description:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .about-home {
+        text-align: center;
+    }
+    
+    .about-home .about-content {
+        margin: 0 auto;
+    }
 }
 
 /* About Page */
@@ -602,6 +643,25 @@ body.nav-open {
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 113, 227, 0.1);
     border-color: rgba(0, 113, 227, 0.3);
     background: #ffffff;
+}
+
+.project-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+        800px circle at var(--mouse-x, 0) var(--mouse-y, 0), 
+        rgba(0, 113, 227, 0.08), 
+        transparent 40%
+    );
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.project-card:hover::before {
+    opacity: 1;
 }
 
 .project-info {
@@ -798,16 +858,21 @@ body.nav-open {
 }
 
 /* Modal System */
+body.modal-open {
+    overflow: hidden !important;
+    height: 100vh !important;
+}
+
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 2000;
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    z-index: 10000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -815,6 +880,7 @@ body.nav-open {
     visibility: hidden;
     transition: all 0.4s ease;
     padding: 20px;
+    overflow: hidden;
 }
 
 .modal.active {
@@ -823,14 +889,35 @@ body.nav-open {
 }
 
 .modal-content {
+    background: white;
     max-width: 900px;
     width: 100%;
-    max-height: 90vh;
+    max-height: 85vh;
     overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     position: relative;
     padding: 3rem;
     border-radius: 24px;
     will-change: transform, opacity;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .close-btn {
@@ -868,6 +955,22 @@ body.nav-open {
     height: auto;
     display: block;
     transition: transform 0.5s ease;
+}
+
+.modal-section {
+    margin-bottom: 1.5rem;
+}
+
+.modal-section h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.modal-section p {
+    font-size: 0.95rem;
+    margin-bottom: 0;
 }
 
 .modal-info h2 {

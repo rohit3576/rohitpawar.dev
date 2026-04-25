@@ -58,7 +58,7 @@ function initHomeAnimations() {
     // Layer 1: Set initial states
     gsap.set(['.hero-title', '.hero-subtitle', '.hero-description', '.hero-cta'], {
         opacity: 0,
-        y: 80,
+        y: 30,
         skewY: 2
     });
     
@@ -87,27 +87,27 @@ function initHomeAnimations() {
             opacity: 1,
             y: 0,
             skewY: 0,
-            duration: 1.2,
-            ease: 'power4.out'
+            duration: 1,
+            ease: 'power3.out'
         })
         .to('.hero-subtitle', {
             opacity: 1,
             y: 0,
-            duration: 0.9,
+            duration: 0.8,
             ease: 'power3.out'
-        }, '-=0.7')
+        }, '-=0.6')
         .to('.hero-description', {
             opacity: 1,
             y: 0,
             duration: 0.8,
             ease: 'power3.out'
-        }, '-=0.5')
+        }, '-=0.6')
         .to('.hero-cta', {
             opacity: 1,
             y: 0,
-            duration: 0.7,
+            duration: 0.8,
             ease: 'power3.out'
-        }, '-=0.4')
+        }, '-=0.6')
         .to('.hero-image', {
             opacity: 1,
             scale: 1,
@@ -128,6 +128,22 @@ function initHomeAnimations() {
         opacity: 0.5,
         scale: 0.95
     });
+
+    // About Home Section scroll reveal
+    if (document.querySelector('.about-home')) {
+        gsap.from(".about-home .section-description", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".about-home",
+                start: "top 80%",
+                once: true
+            }
+        });
+    }
 }
 
 function initAboutAnimations() {

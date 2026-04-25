@@ -5,11 +5,18 @@ let bgContainer = null;
 let bgMouseX = 0, bgMouseY = 0;
 
 function initBackground3D() {
+    if (window.bg3DInitialized) return;
+    
     bgContainer = document.getElementById('global-bg-3d');
     if (!bgContainer) return;
 
-    // Clean up if already exists
-    cleanupBackground3D();
+    // Ensure canvas is appended only once
+    if (bgContainer.querySelector("canvas")) {
+        window.bg3DInitialized = true;
+        return;
+    }
+
+    window.bg3DInitialized = true;
 
     bgScene = new THREE.Scene();
     bgCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -22,6 +29,7 @@ function initBackground3D() {
     bgRenderer.domElement.style.top = '0';
     bgRenderer.domElement.style.left = '0';
     bgRenderer.domElement.style.zIndex = '-1';
+    bgRenderer.domElement.style.pointerEvents = 'none';
     bgContainer.appendChild(bgRenderer.domElement);
 
     createParticles();

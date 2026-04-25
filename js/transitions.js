@@ -12,7 +12,7 @@ function initBarba() {
     barba.init({
         sync: true,
         transitions: [{
-            name: '3d-cinematic-transition',
+            name: 'fade',
             async leave(data) {
                 const currentContainer = data.current.container;
                 
@@ -21,14 +21,8 @@ function initBarba() {
                 
                 await gsap.to(currentContainer, {
                     opacity: 0,
-                    scale: 0.94,
-                    rotateY: 8,
-                    rotateX: -3,
-                    translateZ: -100,
-                    duration: 0.7,
-                    ease: 'power3.inOut',
-                    transformStyle: 'preserve-3d',
-                    transformOrigin: 'center center'
+                    duration: 0.4,
+                    ease: 'power2.out'
                 });
             },
             async enter(data) {
@@ -37,33 +31,23 @@ function initBarba() {
                 const nextContainer = data.next.container;
                 
                 gsap.set(nextContainer, {
-                    opacity: 0,
-                    scale: 0.94,
-                    rotateY: -8,
-                    rotateX: 3,
-                    translateZ: 50,
-                    filter: 'blur(4px)'
+                    opacity: 0
                 });
                 
                 await gsap.to(nextContainer, {
                     opacity: 1,
-                    scale: 1,
-                    rotateY: 0,
-                    rotateX: 0,
-                    translateZ: 0,
-                    filter: 'blur(0px)',
-                    duration: 0.8,
-                    ease: 'power3.out',
-                    transformStyle: 'preserve-3d',
-                    transformOrigin: 'center center',
+                    duration: 0.5,
+                    ease: 'power2.out',
                     onComplete: () => {
                         if (window.initParallax) window.initParallax();
                         if (window.initProfileTilt) window.initProfileTilt();
                         if (window.initCardTilt) window.initCardTilt();
                         if (window.initAnimations) window.initAnimations();
                         if (window.initHero3D) window.initHero3D();
-                        if (window.initBackground3D) window.initBackground3D();
                         if (window.initProjects) window.initProjects();
+                        if (window.initNavbar) window.initNavbar();
+                        if (window.initMobileMenu) window.initMobileMenu();
+                        if (window.initContactForm) window.initContactForm();
                     }
                 });
                 
@@ -75,7 +59,10 @@ function initBarba() {
         views: [{
             namespace: 'home',
             beforeEnter() {
-                if (window.initThree) window.initThree();
+                // Ensure hero 3D is called after a small delay to let DOM settle
+                setTimeout(() => {
+                    if (window.initHero3D) window.initHero3D();
+                }, 100);
             }
         }, {
             namespace: 'about',

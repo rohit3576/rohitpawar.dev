@@ -22,9 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
         window.initBackground3D();
     }
     
-    if (window.initAnimations) {
-        window.initAnimations();
-    }
+    setTimeout(() => {
+        if (window.initHero3D) {
+            window.initHero3D();
+        }
+        
+        if (window.initAnimations) {
+            window.initAnimations();
+        }
+    }, 200);
 });
 
 // Smooth Scroll with Lenis
@@ -61,6 +67,7 @@ function initSmoothScroll() {
 function getLenis() {
     return lenis;
 }
+window.getLenis = getLenis;
 
 // Advanced Multi-Layer Parallax
 function initAdvancedParallax() {
@@ -218,6 +225,10 @@ function initCardTilt() {
             // Calculate tilt based on cursor position
             targetX = (y - centerY) / 10;
             targetY = (centerX - x) / 10;
+
+            // Set CSS variables for Liquid Glass effect
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
         });
         
         card.addEventListener('mouseleave', () => {
@@ -341,3 +352,6 @@ window.initSmoothScroll = initSmoothScroll;
 window.initAdvancedParallax = initAdvancedParallax;
 window.initProfileTilt = initProfileTilt;
 window.initCardTilt = initCardTilt;
+window.initNavbar = initNavbar;
+window.initMobileMenu = initMobileMenu;
+window.initContactForm = initContactForm;
