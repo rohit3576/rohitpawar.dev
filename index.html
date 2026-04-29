@@ -1,118 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Rohit Pawar - Full Stack and AI Developer portfolio featuring React, Node, Machine Learning, and interactive web experiences."
+    />
+    <meta name="theme-color" content="#08090b" />
     <title>Rohit Pawar | Full Stack & AI Developer</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body data-barba="wrapper">
-    
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-    <div id="global-bg-3d"></div>
-
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">RP<span>.</span></a>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link active">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="projects.html" class="nav-link">Projects</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-            </div>
-            <button class="mobile-toggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-
-    <div class="mobile-menu">
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-    </div>
-
-    <main data-barba="container" data-barba-namespace="home">
-        <section class="hero">
-            <div class="parallax-bg">
-                <div class="gradient-layer"></div>
-                <div class="blob blob-1"></div>
-                <div class="blob blob-2"></div>
-                <div class="blob blob-3"></div>
-            </div>
-            
-            <div id="three-canvas-container"></div>
-            
-            <div class="hero-content">
-                <div class="hero-grid">
-                    <div class="hero-text">
-                        <h1 class="hero-title">Rohit Pawar</h1>
-                        <h2 class="hero-subtitle">Full Stack & AI Developer</h2>
-                        <p class="hero-description">Building intelligent systems with real-world impact</p>
-                        <div class="hero-cta">
-                            <a href="projects.html" class="btn-primary">Explore Work</a>
-                        </div>
-                    </div>
-                    <div class="hero-image">
-                        <div id="hero-3d"></div>
-                        <div class="profile-glow"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section about-home">
-            <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
-                    <p class="section-description">
-                        I’m a Full Stack & AI Developer focused on building modern, scalable web and application-based solutions that solve real-world problems. I work with clients to turn ideas into fully functional digital products — from designing clean, user-friendly interfaces to developing robust backend systems and integrating intelligent AI features. My experience spans web development, application development, and machine learning integration, allowing me to create solutions that are not only visually appealing but also powerful and efficient under the hood.
-                    </p>
-                    <p class="section-description">
-                        I believe good software is more than just code — it’s about delivering value, improving user experience, and creating systems that are reliable, maintainable, and ready for real-world use. Whether it’s a business website, a custom application, or an AI-powered tool, I focus on building products that are fast, scalable, and tailored to the needs of users and clients. I’m always exploring new technologies and approaches to build smarter, more impactful solutions, and I’m open to freelance projects, collaborations, and opportunities where I can contribute to meaningful and innovative work.
-                    </p>
-                    <p class="section-description">
-                        🚀 <strong>Recent Focus:</strong> Currently diving deep into <strong>Retrieval-Augmented Generation (RAG)</strong> systems, exploring how to enhance LLMs with private knowledge bases to deliver more accurate, source-grounded AI responses. Also experimenting with <strong>Three.js</strong> to push the boundaries of immersive web experiences — because great technology should feel as good as it works.
-                    </p>
-                    <p class="section-description">
-                        💡 <strong>Beyond Code:</strong> When I'm not architecting full-stack applications or fine-tuning AI models, I contribute to open-source documentation, mentor aspiring developers on building their first portfolio, and explore the intersection of art and technology through creative coding.
-                    </p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <h3>Rohit Pawar</h3>
-            <p>Full Stack & AI Developer</p>
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="projects.html">Projects</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <p class="copyright">© 2026 Rohit Pawar</p>
-        </div>
-    </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.158.0/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://unpkg.com/@barba/core"></script>
-    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-    <script src="js/threeScene.js"></script>
-    <script src="js/background3d.js"></script>
-    <script src="js/hero3d.js"></script>
-    <script src="js/animations.js"></script>
-    <script src="js/transitions.js"></script>
-    <script src="js/main.js"></script>
-</body>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
