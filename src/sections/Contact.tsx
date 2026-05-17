@@ -8,7 +8,7 @@ export const Contact = () => (
     <SectionHeader
       eyebrow="Contact"
       title="Let’s build something useful and polished."
-      copy="Available for full stack, frontend, AI-integrated products, and internship or freelance opportunities."
+      copy="Available for AI/ML development, backend systems, intelligent web products, and internship or freelance opportunities."
     />
     <div className="contact-panel" data-reveal>
       <div>

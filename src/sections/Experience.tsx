@@ -6,7 +6,7 @@ export const Experience = () => (
     <SectionHeader
       eyebrow="Career"
       title="Experience shaped by shipping, testing, and integration."
-      copy="A concise timeline of hands-on full stack development, AI integration, and deployment work."
+      copy="A concise timeline of hands-on web development, AI integration, and deployment work."
     />
     <div className="timeline">
       {experiences.map((experience) => (

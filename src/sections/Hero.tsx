@@ -32,7 +32,7 @@ export const Hero = () => (
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.75, delay: 0.22 }}
       >
-        Full Stack & AI <AnimatedTitle />
+        Python, Java & AI/ML <AnimatedTitle />
       </motion.p>
       <motion.p
         className="hero-intro"

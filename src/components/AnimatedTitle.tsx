@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const labels = ['Developer', 'Designer'];
+const labels = ['Developer', 'Engineer'];
 
 export const AnimatedTitle = () => {
   const [index, setIndex] = useState(0);

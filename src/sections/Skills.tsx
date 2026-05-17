@@ -6,7 +6,7 @@ export const Skills = () => (
   <section id="skills" className="content-section skills-section">
     <SectionHeader
       eyebrow="What I Do"
-      title="A practical stack for modern full stack products."
+      title="A practical stack for modern AI and web systems."
       copy="Frontend craft, backend delivery, and AI workflows come together in real projects."
     />
     <div className="skill-grid">
