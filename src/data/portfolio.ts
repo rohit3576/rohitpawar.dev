@@ -41,9 +41,9 @@ export const profile = {
   location: 'Vasai-Virar, Maharashtra, India',
   phone: '+91 73979 73352',
   email: 'rohit03576@gmail.com',
-  github: 'https://github.com/',
-  linkedin: 'https://www.linkedin.com/',
-  resume: '/resume/rohit-pawar-resume.jpg',
+  github: 'https://github.com/rohit3576',
+  linkedin: 'https://www.linkedin.com/in/rohitpawar03576/',
+  resume: '/resume/Rohit_CV.pdf',
   intro:
     'Computer Engineering student building full stack web applications and AI-driven systems. I focus on scalable, real-world products with clean architecture, applied machine learning, and reliable deployment paths.',
   education: {
